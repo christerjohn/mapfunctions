@@ -28,7 +28,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT AsText(SHAPE) AS SHAPE FROM boundary";
+$sql = "SELECT AsText(SHAPE) AS SHAPE FROM flood";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -92,16 +92,19 @@ function init() {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         },
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        var colors = ['#ffff00','#ff6600','#ff0000'];
+
     for (i = 0; i < polys.length; i++) {
         tmp = parsePolyStrings(polys[i]);
         if (tmp.length) {
             polys[i] = new google.maps.Polygon({
                 paths : tmp,
-                strokeColor : '#FF0000',
+                strokeColor : colors[i],
                 strokeOpacity : 0.8,
                 strokeWeight : 2,
-                fillColor : '#FF0000',
-                fillOpacity : 0.35
+                fillColor : colors[i],
+                fillOpacity : 0.8
             });
             polys[i].setMap(map);
         }
@@ -113,3 +116,6 @@ init();
 </script>
 </body>
 </html>
+
+<!-- 
+SELECT residents.id FROM dissolve, residents WHERE ST_CONTAINS(dissolve.diz, Point(residents.latitude, residents.longitude)) -->

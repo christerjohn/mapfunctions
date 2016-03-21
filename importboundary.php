@@ -2,7 +2,7 @@
 
 //connect to the database 
 $connect = mysql_connect("localhost","root",""); 
-mysql_select_db("test",$connect); //select the table 
+mysql_select_db("brisgeo",$connect); //select the table 
 // 
 
 
@@ -15,7 +15,7 @@ if (isset($_FILES['csv']['size']) > 0) {
     //loop through the csv file and insert into database 
     do { 
         if ($data[0]) { 
-            mysql_query("INSERT INTO regions (WKT) VALUES 
+            mysql_query("INSERT INTO boundary (shape) VALUES 
                 ( 
                    GeomFromText('".addslashes($data[0])."')
                  
@@ -26,7 +26,7 @@ if (isset($_FILES['csv']['size']) > 0) {
     // 
 
     //redirect 
-    header('Location: import.php?success=1'); die; 
+    header('Location: importboundary.php?success=1'); die; 
 
 } 
 
