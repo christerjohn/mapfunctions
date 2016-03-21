@@ -1,4 +1,3 @@
-
 <html>
   <head>
     <title>MarkerClusterer v3 Simple Example</title>
@@ -32,13 +31,11 @@
     <script>
       function initialize() {
         // var center = new google.maps.LatLng(37.4419, -122.1419);
-
         // var map = new google.maps.Map(document.getElementById('map'), {
         //   zoom: 3,
         //   center: center,
         //   mapTypeId: google.maps.MapTypeId.ROADMAP
         // });
-
         // var markers = [];
         // for (var i = 0; i < 100; i++) {
         //   var dataPhoto = data.photos[i];
@@ -57,13 +54,11 @@
       ['Manly Beach', -33.80010128657071, 151.28747820854187],
       ['Maroubra Beach', -33.950198, 151.259302]
     ];
-
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: new google.maps.LatLng(-33.92, 151.25),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
     var markersArray = [];
@@ -72,7 +67,6 @@
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map
       });
-
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infowindow.setContent(locations[i][0]);
