@@ -25,33 +25,43 @@ mysql_select_db("$dbname") or die(mysql_error());
  var map = null;
  var currentPopup;
  var bounds = new google.maps.LatLngBounds();
- var markers = [];
- function addMarker(lat, lng, info) {
+ var markerArray = [];
+function addMarker(lat, lng, info) {
  var pt = new google.maps.LatLng(lat, lng);
  bounds.extend(pt);
- markers.push( 
-	 new google.maps.Marker({
-	 position: pt,
-	 icon: icon,
-	 map: map
-	 })
- );
-
-
-//infowindow for loop
-
-
+ var marker = new google.maps.Marker({
+ position: pt,
+ icon: icon,
+ map: map
+ });
+ var popup = new google.maps.InfoWindow({
+ content: info,
+ maxWidth: 300
+ });
+ google.maps.event.addListener(marker, "click", function() {
+ if (currentPopup != null) {
+ currentPopup.close();
+ currentPopup = null;
+ }
+ popup.open(map, marker);
+ currentPopup = popup;
+ });
+ google.maps.event.addListener(popup, "closeclick", function() {
+ map.panTo(center);
+ currentPopup = null;
+ });
+ markerArray.push(marker);
  }
 
 
 function toggleMarkers() {
-    if (markers[0].getMap() != null) {
+    if (markerArray[0].getMap() != null) {
         var arg = null;
     } else {
         var arg = map;
     }
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(arg);
+    for (var i = 0; i < markerArray.length; i++) {
+        markerArray[i].setMap(arg);
     }
 }
 

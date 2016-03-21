@@ -22,12 +22,13 @@ mysql_select_db("$dbname") or die(mysql_error());
  //Sample code written by August Li
  var icon = new google.maps.MarkerImage("https://lh6.ggpht.com/GO-A_KjZDF9yJeeER2fajzO4MgqML-q2rccm27ynBlD6R-xOR3pJOb42WKfE0MNFtRsKwK4=w9-h9",
  new google.maps.Size(10, 10), new google.maps.Point(0, 0),
- new google.maps.Point(0,0));
+ new google.maps.Point(5,5));
  var center = null;
  var map = null;
  var currentPopup;
  var bounds = new google.maps.LatLngBounds();
  var latlongs = [];
+ var markerArray = [];
  function addPoint(lat, lng) {
  	var pt = new google.maps.LatLng(lat, lng);
  	bounds.extend(pt);
@@ -60,10 +61,20 @@ mysql_select_db("$dbname") or die(mysql_error());
  map.panTo(center);
  currentPopup = null;
  });
+  markerArray.push(marker);
  }
 
        function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
+
+            if (markerArray[0].getMap() != null) {
+                var arg = null;
+            } else {
+                var arg = map;
+            }
+            for (var i = 0; i < markerArray.length; i++) {
+                markerArray[i].setMap(arg);
+            }
       }
 
 
