@@ -25,31 +25,36 @@ mysql_select_db("$dbname") or die(mysql_error());
  var map = null;
  var currentPopup;
  var bounds = new google.maps.LatLngBounds();
+ var markers = [];
  function addMarker(lat, lng, info) {
  var pt = new google.maps.LatLng(lat, lng);
  bounds.extend(pt);
- var marker = new google.maps.Marker({
- position: pt,
- icon: icon,
- map: map
- });
- var popup = new google.maps.InfoWindow({
- content: info,
- maxWidth: 300
- });
- google.maps.event.addListener(marker, "click", function() {
- if (currentPopup != null) {
- currentPopup.close();
- currentPopup = null;
+ markers.push( 
+	 new google.maps.Marker({
+	 position: pt,
+	 icon: icon,
+	 map: map
+	 })
+ );
+
+
+//infowindow for loop
+
+
  }
- popup.open(map, marker);
- currentPopup = popup;
- });
- google.maps.event.addListener(popup, "closeclick", function() {
- map.panTo(center);
- currentPopup = null;
- });
- }
+
+
+function toggleMarkers() {
+    if (markers[0].getMap() != null) {
+        var arg = null;
+    } else {
+        var arg = map;
+    }
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(arg);
+    }
+}
+
  function initMap() {
  map = new google.maps.Map(document.getElementById("map"), {
  center: new google.maps.LatLng(0, 0),
@@ -82,4 +87,10 @@ mysql_select_db("$dbname") or die(mysql_error());
  </head>
  <body onload="initMap()" style="margin:0px; border:0px; padding:0px;">
  <div id="map"></div>
+      <div id="floating-panel">
+      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="toggleMarkers()">Toggle Markers</button>
+      <button onclick="changeRadius()">Change radius</button>
+      <button onclick="changeOpacity()">Change opacity</button>
+    </div>
  </html>

@@ -15,41 +15,25 @@ mysql_select_db("$dbname") or die(mysql_error());
  body { font: normal 10pt Helvetica, Arial; }
  #map { width: 750px; height: 750px; border: 0px; padding: 0px; }
  </style>
- <script src="http://maps.google.com/maps/api/js?v=3&sensor=false" type="text/javascript"></script>
+     <script 
+        src="https://maps.googleapis.com/maps/api/js?&libraries=visualization"  type="text/javascript">
+    </script>
  <script type="text/javascript">
- //Sample code written by August Li
- var icon = new google.maps.MarkerImage("https://lh6.ggpht.com/GO-A_KjZDF9yJeeER2fajzO4MgqML-q2rccm27ynBlD6R-xOR3pJOb42WKfE0MNFtRsKwK4=w9-h9",
- new google.maps.Size(10, 10), new google.maps.Point(0, 0),
- new google.maps.Point(0,0));
+ 
  var center = null;
  var map = null;
  var currentPopup;
  var bounds = new google.maps.LatLngBounds();
- function addMarker(lat, lng, info) {
- var pt = new google.maps.LatLng(lat, lng);
- bounds.extend(pt);
- var marker = new google.maps.Marker({
- position: pt,
- icon: icon,
- map: map
- });
- var popup = new google.maps.InfoWindow({
- content: info,
- maxWidth: 300
- });
- google.maps.event.addListener(marker, "click", function() {
- if (currentPopup != null) {
- currentPopup.close();
- currentPopup = null;
+ var latlongs = [];
+ function addPoint(lat, lng) {
+ 	var pt = new google.maps.LatLng(lat, lng);
+ 	bounds.extend(pt);
+ 	latlongs.push(pt);
  }
- popup.open(map, marker);
- currentPopup = popup;
- });
- google.maps.event.addListener(popup, "closeclick", function() {
- map.panTo(center);
- currentPopup = null;
- });
+ function getPoints() {
+ 	return latlongs;
  }
+
  function initMap() {
  map = new google.maps.Map(document.getElementById("map"), {
  center: new google.maps.LatLng(0, 0),
@@ -64,6 +48,12 @@ mysql_select_db("$dbname") or die(mysql_error());
  style: google.maps.NavigationControlStyle.SMALL
  }
  });
+
+          heatmap = new google.maps.visualization.HeatmapLayer({
+          data: getPoints(),
+          map: map
+        });
+
  <?php
  $query = mysql_query("SELECT id, latitude as lat, longitude as lon, description FROM residents");
  while ($row = mysql_fetch_array($query)){
@@ -71,7 +61,7 @@ mysql_select_db("$dbname") or die(mysql_error());
  $lat=$row['lat'];
  $lon=$row['lon'];
  $description=$row['description'];
- echo ("addMarker($lat, $lon,'<b>$name</b><br/>$description');\n");
+   echo ("addPoint($lat, $lon);");
  }
  ?>
  center = bounds.getCenter();

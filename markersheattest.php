@@ -15,7 +15,9 @@ mysql_select_db("$dbname") or die(mysql_error());
  body { font: normal 10pt Helvetica, Arial; }
  #map { width: 750px; height: 750px; border: 0px; padding: 0px; }
  </style>
- <script src="http://maps.google.com/maps/api/js?v=3&sensor=false" type="text/javascript"></script>
+     <script 
+        src="https://maps.googleapis.com/maps/api/js?&libraries=visualization"  type="text/javascript">
+    </script>
  <script type="text/javascript">
  //Sample code written by August Li
  var icon = new google.maps.MarkerImage("https://lh6.ggpht.com/GO-A_KjZDF9yJeeER2fajzO4MgqML-q2rccm27ynBlD6R-xOR3pJOb42WKfE0MNFtRsKwK4=w9-h9",
@@ -25,6 +27,15 @@ mysql_select_db("$dbname") or die(mysql_error());
  var map = null;
  var currentPopup;
  var bounds = new google.maps.LatLngBounds();
+ var latlongs = [];
+ function addPoint(lat, lng) {
+ 	var pt = new google.maps.LatLng(lat, lng);
+ 	bounds.extend(pt);
+ 	latlongs.push(pt);
+ }
+ function getPoints() {
+ 	return latlongs;
+ }
  function addMarker(lat, lng, info) {
  var pt = new google.maps.LatLng(lat, lng);
  bounds.extend(pt);
@@ -50,6 +61,12 @@ mysql_select_db("$dbname") or die(mysql_error());
  currentPopup = null;
  });
  }
+
+       function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+
  function initMap() {
  map = new google.maps.Map(document.getElementById("map"), {
  center: new google.maps.LatLng(0, 0),
@@ -64,6 +81,13 @@ mysql_select_db("$dbname") or die(mysql_error());
  style: google.maps.NavigationControlStyle.SMALL
  }
  });
+
+          heatmap = new google.maps.visualization.HeatmapLayer({
+          data: getPoints(),
+          map: null
+        });
+
+
  <?php
  $query = mysql_query("SELECT id, latitude as lat, longitude as lon, description FROM residents");
  while ($row = mysql_fetch_array($query)){
@@ -72,6 +96,7 @@ mysql_select_db("$dbname") or die(mysql_error());
  $lon=$row['lon'];
  $description=$row['description'];
  echo ("addMarker($lat, $lon,'<b>$name</b><br/>$description');\n");
+   echo ("addPoint($lat, $lon);");
  }
  ?>
  center = bounds.getCenter();
@@ -82,4 +107,10 @@ mysql_select_db("$dbname") or die(mysql_error());
  </head>
  <body onload="initMap()" style="margin:0px; border:0px; padding:0px;">
  <div id="map"></div>
+     <div id="floating-panel">
+      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="changeGradient()">Change gradient</button>
+      <button onclick="changeRadius()">Change radius</button>
+      <button onclick="changeOpacity()">Change opacity</button>
+    </div>
  </html>
