@@ -1,3 +1,4 @@
+<!-- Display Markers on Google maps of the Resident of a Barangay Already connected to DB -->
 <?php
 $dbname            ='brisgeo'; //Name of the database
 $dbuser            ='root'; //Username for the db
