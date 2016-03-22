@@ -30,6 +30,7 @@ mysql_select_db("$dbname") or die(mysql_error());
  var bounds = new google.maps.LatLngBounds();
  var latlongs = [];
  var markerArray = [];
+ var polys = [];
  function addPoint(lat, lng) {
  	var pt = new google.maps.LatLng(lat, lng);
  	bounds.extend(pt);
@@ -76,7 +77,57 @@ mysql_select_db("$dbname") or die(mysql_error());
             for (var i = 0; i < markerArray.length; i++) {
                 markerArray[i].setMap(arg);
             }
+
+            var arg = null;
+            
+            for (var i = 0; i < polys.length; i++) {
+                polys[i].setMap(arg);
+            }
       }
+
+      function toggleBoundary() {
+            heatmap.setMap(null);
+
+            var arg = map;
+            
+            for (var i = 0; i < markerArray.length; i++) {
+                markerArray[i].setMap(arg);
+            }
+
+            if (polys[0].getMap() != null) {
+                var arg = null;
+            } else {
+                var arg = map;
+            }
+            for (var i = 0; i < polys.length; i++) {
+                polys[i].setMap(arg);
+            }
+      }
+
+
+function parsePolyStrings(ps) {
+    var i, j, lat, lng, tmp, tmpArr,
+        arr = [],
+        //match '(' and ')' plus contents between them which contain anything other than '(' or ')'
+        m = ps.match(/\([^\(\)]+\)/g);
+    if (m !== null) {
+        for (i = 0; i < m.length; i++) {
+            //match all numeric strings
+            tmp = m[i].match(/-?\d+\.?\d*/g);
+            if (tmp !== null) {
+                //convert all the coordinate sets in tmp from strings to Numbers and convert to LatLng objects
+                for (j = 0, tmpArr = []; j < tmp.length; j+=2) {
+                    lng = Number(tmp[j]);
+                    lat = Number(tmp[j + 1]);
+                    tmpArr.push(new google.maps.LatLng(lat, lng));
+                }
+                arr.push(tmpArr);
+            }
+        }
+    }
+    //array of arrays of LatLng objects, or empty array
+    return arr;
+}
 
 
  function initMap() {
@@ -100,6 +151,7 @@ mysql_select_db("$dbname") or die(mysql_error());
         });
 
 
+
  <?php
  $query = mysql_query("SELECT id, latitude as lat, longitude as lon, description FROM residents");
  while ($row = mysql_fetch_array($query)){
@@ -110,7 +162,33 @@ mysql_select_db("$dbname") or die(mysql_error());
  echo ("addMarker($lat, $lon,'<b>$name</b><br/>$description');\n");
    echo ("addPoint($lat, $lon);");
  }
+?>
+
+
+<?php
+$query = mysql_query("SELECT AsText(SHAPE) AS SHAPE FROM boundary");
+ while ($row = mysql_fetch_array($query)){
+     $temp = $row["SHAPE"];
+     echo "polys.push('$temp');";
+ }
+
  ?>
+
+     for (i = 0; i < polys.length; i++) {
+        tmp = parsePolyStrings(polys[i]);
+        if (tmp.length) {
+            polys[i] = new google.maps.Polygon({
+                paths : tmp,
+                strokeColor : '#FF0000',
+                strokeOpacity : 0.8,
+                strokeWeight : 2,
+                fillColor : '#FF0000',
+                fillOpacity : 0.35
+            });
+            polys[i].setMap(null);
+        }
+    }
+
  center = bounds.getCenter();
  map.fitBounds(bounds);
  
@@ -121,7 +199,7 @@ mysql_select_db("$dbname") or die(mysql_error());
  <div id="map"></div>
      <div id="floating-panel">
       <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-      <button onclick="changeGradient()">Change gradient</button>
+      <button onclick="toggleBoundary()">Toggle Boundary</button>
       <button onclick="changeRadius()">Change radius</button>
       <button onclick="changeOpacity()">Change opacity</button>
     </div>
