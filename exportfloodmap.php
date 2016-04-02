@@ -4,9 +4,9 @@ if(isset($_POST['export'])){
 		$conn = mysql_connect("localhost","root","");
 		mysql_select_db("brisgeo",$conn);
 		
-	  $filename = "boundary.csv";
+	  $filename = "floodmap.csv";
 	  $fp = fopen('php://output', 'w');
-	  $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='brisgeo' AND TABLE_NAME='boundary'";
+	  $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='brisgeo' AND TABLE_NAME='flood'";
 	  $result = mysql_query($query);
 	while ($row = mysql_fetch_row($result)) 
 	{
@@ -17,7 +17,7 @@ if(isset($_POST['export'])){
 	header('Content-Disposition: attachment; filename='.$filename);
 	fputcsv($fp, $header);
 
-	$query = "SELECT AsText(SHAPE) AS SHAPE FROM boundary";
+	$query = "SELECT level,AsText(SHAPE) AS SHAPE FROM flood";
 	$result = mysql_query($query);
 	while($row = mysql_fetch_row($result))
 	{
