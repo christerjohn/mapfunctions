@@ -2,7 +2,7 @@
 
 //connect to the database 
 $connect = mysql_connect("localhost","root",""); 
-mysql_select_db("brisgeo",$connect); //select the table 
+mysql_select_db("brisgis_db",$connect); //select the table 
 // 
 
 
@@ -15,8 +15,9 @@ if (isset($_FILES['csv']['size']) > 0) {
     //loop through the csv file and insert into database 
     do { 
         if ($data[0]) { 
-            mysql_query("INSERT INTO boundary (shape) VALUES 
+            mysql_query("INSERT INTO purok_boundaries (purok_id, shape) VALUES 
                 ( 
+                  '".addslashes($data[1])."',
                    GeomFromText('".addslashes($data[0])."')
                  
                 ) 

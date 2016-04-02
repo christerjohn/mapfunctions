@@ -15,14 +15,13 @@ if (isset($_FILES['csv']['size']) > 0) {
     //loop through the csv file and insert into database 
     do { 
         if ($data[0]) { 
-            mysql_query("INSERT INTO puroks (id, barangay_id, name, description, president, population) VALUES 
+            mysql_query("INSERT INTO puroks (barangay_id, name, description, president, population) VALUES 
                 ( 
-                   ".addslashes($data[0]).",
-                   ".addslashes($data[1]).",
+                   '1',
                    '".addslashes($data[2])."',
                    '".addslashes($data[3])."',
                    '".addslashes($data[4])."',
-                   ".addslashes($data[5])."              
+                   '".addslashes($data[5])."'       
                 ) 
             "); 
         } 
