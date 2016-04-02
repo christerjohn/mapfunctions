@@ -14,19 +14,20 @@ if (isset($_FILES['csv']['size']) > 0) {
     $count = -1;
     //loop through the csv file and insert into database 
     do { 
+      $year = 2013 - $data[13];
         if ($data[0]) { 
-            mysql_query("INSERT INTO households (id, latitude, longitude, purok_id, name, net_value, household_usage, structure, area, holding) VALUES 
+            mysql_query("INSERT INTO residents (id, last_name, first_name, middle_name, birthdate, gender, civil_status, education, occupation_category, occupation_specific) VALUES 
                 ( 
                   '".$count."',
-                  '".addslashes($data[3])."',
-                  '".addslashes($data[4])."',
-                  '".addslashes($data[5])."',
-                  '".addslashes($data[9])." Household',
-                  '".addslashes($data[39])."',
-                  '".addslashes($data[40])."',
-                  '".addslashes($data[43])."',
-                  '".addslashes($data[41])."',
-                  '".addslashes($data[73])."'
+                  '".addslashes($data[9])."',
+                  '".addslashes($data[10])."',
+                  '".addslashes($data[11])."',
+                  '".$year."-11-12',
+                  '".addslashes($data[12])."',
+                  '".addslashes($data[15])."',
+                  '".addslashes($data[16])."',
+                  '".addslashes($data[17])."',
+                  '".addslashes($data[18])."'
                 ) 
             "); 
         } 
