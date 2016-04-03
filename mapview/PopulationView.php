@@ -255,6 +255,22 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
  
  }
  </script>
+
+  <script>
+        function enable() {
+          document.getElementById("structure1").disabled=false;
+          document.getElementById("family1").disabled=false;
+          document.getElementById("usage1").disabled=false;
+          document.getElementById("education1").disabled=false;
+          document.getElementById("occupation1").disabled=false;
+          document.getElementById("gender1").disabled=false;
+          document.getElementById("age1").disabled=false;
+          document.getElementById("civil1").disabled=false;
+
+        }
+  </script>
+
+
  </head>
 <body onload="initMap()" style="margin:0px; border:0px; padding:0px;">
 
@@ -268,7 +284,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                  <div class="form-group row">
                                     <label class="col-md-4 control-label">Province</label>
                                     <div class="col-md-7">
-                                        <select class="form-control" id="barangay1">
+                                        <select class="form-control" id="province1">
                                         <option>Lanao del Norte</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -279,7 +295,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                   <div class="form-group row">
                                     <label class="col-md-4 control-label">Municipality</label>
                                     <div class="col-md-7">
-                                        <select class="form-control" id="barangay1">
+                                        <select class="form-control" id="mun1">
                                         <option>Iligan City</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -302,7 +318,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                       <div class="col-sm-4"></div>
                                       <div class="col-sm-4"></div>
                                       <div class="col-sm-4">
-                                              <button  type="button" class="btn btn-primary" btn-sm>GO</button>
+                                          <button  onclick="enable()" type="button" class="btn btn-primary" btn-sm>GO</button>
                                       </div>
                                  </div>
                                 <!--  <div class="col-md-10">
@@ -338,7 +354,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Structure</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="structure1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -348,7 +364,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Usage</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="usage1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -357,7 +373,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Family Income</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="family1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -366,7 +382,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Education</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="education1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -375,7 +391,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Occupation</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="occupation1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -384,7 +400,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Gender</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="gender1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -393,7 +409,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Age</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="age1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -402,7 +418,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Civil Status</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="barangay1">
+                                              <select class="form-control" id="civil1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>    
                                               </select> 
@@ -432,4 +448,4 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
 
          </div>
     
-</body
+</body>
