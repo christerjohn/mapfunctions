@@ -266,7 +266,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
           document.getElementById("gender1").disabled=false;
           document.getElementById("age1").disabled=false;
           document.getElementById("civil1").disabled=false;
-
+          document.getElementById("go").disabled=false;
         }
   </script>
 
@@ -428,7 +428,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4">
-                                                <button  type="button" class="btn btn-primary" btn-sm>GO</button>
+                                                <button  id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
                                         </div>
                                     </div>
                             </div>

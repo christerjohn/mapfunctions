@@ -7,6 +7,10 @@ $dbserver          ='localhost'; //Name of the mysql server
  
 $dbcnx = mysql_connect ("$dbserver", "$dbuser", "$dbpass");
 mysql_select_db("$dbname") or die(mysql_error());
+$query = "SELECT   name FROM provinces ";
+$result = mysql_query($query) or die(mysql_error()."[".$query."]");
+
+
 ?>
 <html>
  <head>
@@ -249,7 +253,6 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
         }
     }
 
-
  center = bounds.getCenter();
  map.fitBounds(bounds);
  
@@ -260,12 +263,12 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
         function enable() {
           document.getElementById("return1").disabled=false;
           document.getElementById("highlight1").disabled=false;
+          document.getElementById("go").disabled=false;
         }
   </script>
 
  </head>
 <body onload="initMap()" style="margin:0px; border:0px; padding:0px;">
-
 
             <div class="row">
                <div class="col-md-3">
@@ -277,10 +280,12 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <label class="col-md-4 control-label">Province</label>
                                     <div class="col-md-7">
                                         <select class="form-control" id="province1">
-                                        <option>Lanao del Norte</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                           <?php 
+                                              while ($row = mysql_fetch_array($result))
+                                              {
+                                                  echo "<option>".$row[name]."</option>";
+                                              }
+                                            ?>  
                                         </select>                          
                                     </div>
                                  </div>
@@ -310,7 +315,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                       <div class="col-sm-4"></div>
                                       <div class="col-sm-4"></div>
                                       <div class="col-sm-4">
-                                              <button  onclick="enabled()" type="button" class="btn btn-primary" btn-sm>GO</button>
+                                              <button  onclick="enable()" type="button" class="btn btn-primary" btn-sm>GO</button>
                                       </div>
                                  </div>
                                 <!--  <div class="col-md-10">
@@ -348,7 +353,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Highlight Resident</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="highligt1" disabled>
+                                              <select class="form-control" id="highlight1" disabled>
                                               <option>Level 1</option>
                                               <option>Level 2</option>
                                               <option>Level 3</option>
@@ -356,7 +361,13 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                               </select>                          
                                           </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-4">
+                                                <button  id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
+                                        </div>
+                                 </div>
 
                             </div>
                      </div>
