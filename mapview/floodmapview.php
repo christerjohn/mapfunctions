@@ -7,9 +7,17 @@ $dbserver          ='localhost'; //Name of the mysql server
  
 $dbcnx = mysql_connect ("$dbserver", "$dbuser", "$dbpass");
 mysql_select_db("$dbname") or die(mysql_error());
-$query = "SELECT   name FROM provinces ";
-$result = mysql_query($query) or die(mysql_error()."[".$query."]");
 
+$query = "SELECT   name FROM provinces";
+$provinces = mysql_query($query) or die(mysql_error()."[".$query."]");
+$query1 = "SELECT name FROM municipalities";
+$municipalities = mysql_query($query1) or die(mysql_error()."[".$query1."]");
+$query2 = "SELECT name FROM barangays";
+$barangay = mysql_query($query2) or die(mysql_error()."[".$query2."]");
+$query3 = "SELECT return_period FROM flood_maps";
+$return = mysql_query($query3) or die(mysql_error()."[".$query3."]");
+$query4 = "SELECT level FROM flood_maps";
+$level = mysql_query($query4) or die(mysql_error()."[".$query4."]");
 
 ?>
 <html>
@@ -281,7 +289,7 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                     <div class="col-md-7">
                                         <select class="form-control" id="province1">
                                            <?php 
-                                              while ($row = mysql_fetch_array($result))
+                                              while ($row = mysql_fetch_array($provinces))
                                               {
                                                   echo "<option>".$row[name]."</option>";
                                               }
@@ -292,23 +300,27 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                   <div class="form-group row">
                                     <label class="col-md-4 control-label">Municipality</label>
                                     <div class="col-md-7">
-                                        <select class="form-control" id="mun1">
-                                        <option>Iligan City</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        </select>                          
+                                       <select class="form-control" id="mun1">
+                                           <?php 
+                                              while ($row = mysql_fetch_array($municipalities))
+                                              {
+                                                  echo "<option>".$row[name]."</option>";
+                                              }
+                                            ?>  
+                                        </select>                         
                                     </div>
                                  </div>
                                   <div class="form-group row">
                                     <label class="col-md-4 control-label">Barangay</label>
                                     <div class="col-md-7">
                                         <select class="form-control" id="barangay1">
-                                        <option>Hinaplanon</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        </select>                          
+                                            <?php 
+                                                  while ($row = mysql_fetch_array($barangay))
+                                                  {
+                                                      echo "<option>".$row[name]."</option>";
+                                                  }
+                                                ?>  
+                                        </select>                        
                                     </div>
                                  </div>
                                  <div class="row">
@@ -344,9 +356,12 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                       <label class="col-md-4 control-label">Return Period</label>
                                           <div class="col-md-7">
                                               <select class="form-control" id="return1" disabled>
-                                              <option>25 years</option>
-                                              <option>50 years</option>
-                                              <option>100</option>
+                                                 <?php 
+                                                    while ($row = mysql_fetch_array($return))
+                                                    {
+                                                        echo "<option>".$row[return_period]."</option>";
+                                                    }
+                                                  ?>  
                                               </select>                          
                                           </div>
                                     </div>
@@ -354,10 +369,12 @@ $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
                                       <label class="col-md-4 control-label">Highlight Resident</label>
                                           <div class="col-md-7">
                                               <select class="form-control" id="highlight1" disabled>
-                                              <option>Level 1</option>
-                                              <option>Level 2</option>
-                                              <option>Level 3</option>
-                                              <option>Level 4</option>
+                                                 <?php 
+                                                    while ($row = mysql_fetch_array($level))
+                                                    {
+                                                        echo "<option>".$row[level]."</option>";
+                                                    }
+                                                  ?>  
                                               </select>                          
                                           </div>
                                     </div>
