@@ -1,0 +1,164 @@
+<!-- Display the Combined Heatmaps and Markers on Google maps by Toggle of the Resident of a Barangay Already connected to DB -->
+<?php
+require_once("../../../../scripts/dbcontroller.php");
+$db_handle = new DBController();
+$query ="SELECT * FROM provinces";
+$results = $db_handle->runQuery($query);
+
+include '../../../../functions/fnc-database/config.php';
+include '../../../../functions/fnc-database/sql-map-options/sql-mapoptions.php';
+include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php';
+
+?>
+<html>
+
+<?php
+    include '../../layouts/partials/htmlheader.php';
+?>
+
+<body class="skin-blue sidebar-mini wysihtml5-supported">
+    <div class="wrapper">
+
+        <?php
+            include '../../layouts/partials/mainheader.php';
+            include '../../layouts/partials/sidebar.php';
+        ?>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="min-height: 858px;">
+            <!-- Your Page Content Here /////////////////////////////////////////// -->
+
+<!-- ////////////////////////////// DARI KA EDIT UG SUGOD ////////////////////////////////////////// -->
+
+<body onload="initMap()" >
+
+            <div class="row" style="margin:0px; border:0px; padding:15px;">
+               <div class="col-md-3">
+                     <div class="panel panel-primary">
+                        <div class="panel-heading">Map Options</div>
+                             <div class="panel-body">
+
+
+                                 <div class="form-group row">
+                                    <label class="col-md-4 control-label">Province</label>
+                                    <div class="col-md-7">
+                                        <select class="form-control" name="province" id="province-list" onChange="getMunicipality(this.value);">
+                                        <option value="">Select Province</option>
+                                          <?php
+                                          foreach($results as $country) {
+                                          ?>
+                                          <option value="<?php echo $country["id"]; ?>"><?php echo $country["name"]; ?></option>
+                                          <?php
+                                          }
+                                          ?>
+                                        </select>                          
+                                    </div>
+                                 </div>
+                                  <div class="form-group row">
+                                    <label class="col-md-4 control-label">Municipality</label>
+                                    <div class="col-md-7">
+                                       <select class="form-control" name="municipality" id="municipality-list" onChange="getBarangay(this.value);">
+                                       <option value="">Select Municipality</option>
+                                        </select>                         
+                                    </div>
+                                 </div>
+                                  <div class="form-group row">
+                                    <label class="col-md-4 control-label">Barangay</label>
+                                    <div class="col-md-7">
+                                        <select class="form-control" name="barangay" id="barangay-list">
+                                          <option value="">Select Barangay</option>
+                                        </select>                        
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                      <div class="col-sm-4"></div>
+                                      <div class="col-sm-4"></div>
+                                      <div class="col-sm-4">
+                                              <button  onclick="enable()" type="button" class="btn btn-primary" btn-sm>GO</button>
+                                      </div>
+                                 </div>
+                             </div>
+                    </div>
+
+                     <div class="panel panel-primary">
+                         <div class="panel-heading">Flood Map</div>
+                             <div class="panel-body">                      
+                                    <div class="form-group row">
+                                      <label class="col-md-4 control-label">Return Period</label>
+                                          <div class="col-md-7">
+                                              <select class="form-control" id="return1" disabled>
+                                                 <?php 
+                                                    while ($row = mysql_fetch_array($return))
+                                                    {
+                                                        echo "<option>".$row[return_period]."</option>";
+                                                    }
+                                                  ?>  
+                                              </select>                          
+                                          </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <label class="col-md-4 control-label">Highlight Resident</label>
+                                          <div class="col-md-7">
+                                              <select class="form-control" id="highlight1" disabled>
+                                                 <?php 
+                                                    while ($row = mysql_fetch_array($level))
+                                                    {
+                                                        echo "<option>".$row[level]."</option>";
+                                                    }
+                                                  ?>  
+                                              </select>                          
+                                          </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-4">
+                                                <button  id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
+                                        </div>
+                                 </div>
+
+                            </div>
+                     </div>
+            
+
+                </div>
+
+                <div class="col-md-9">
+                     <div class="panel panel-primary">
+                         <div class="panel-heading">Map</div>
+                             <div class="panel-body">                      
+                                 <div id="map" style="width:100%;height:85%;"></div>
+                                    
+                            </div>
+                     </div>
+                </div>                
+
+
+         </div>
+    
+</body>
+
+<!-- ////////////////////////////// DARI RA TAMAN KA EDIT ////////////////////////////////////////// -->
+
+
+
+        </div><!-- /.content-wrapper /////////////////////////////////////////// -->
+        <?php
+            include '../../layouts/partials/footer.php';
+        ?>
+    </div><!-- ./wrapper -->
+    <?php
+        include '../../layouts/partials/scripts.php';
+    ?>
+
+
+<?php include '../../../../scripts/script-googlemaps.php'; ?>
+<?php include '../../../../scripts/script-floodenable.php'; ?>
+<?php include '../../../../scripts/scripts-maps/maps.php';?>
+
+<?php include '../../../../scripts/script-dropdown-map-option.php'; ?>
+
+
+</body>
+</html>
+

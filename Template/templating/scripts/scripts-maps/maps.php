@@ -19,13 +19,13 @@
 
 
  function addPoint(lat, lng) {
-    var pt = new google.maps.LatLng(lat, lng);
-    bounds.extend(pt);
-    latlongs.push(pt);
+ 	var pt = new google.maps.LatLng(lat, lng);
+ 	bounds.extend(pt);
+ 	latlongs.push(pt);
  }
 
  function getPoints() {
-    return latlongs;
+ 	return latlongs;
  }
 
  function addMarker(lat, lng, info) {
@@ -152,7 +152,7 @@ function parsePolyStrings(ps) {
 
  function initMap() {
      map = new google.maps.Map(document.getElementById("map"), {
-         center: new google.maps.LatLng(8.253777778,124.2654444),
+         center: new google.maps.LatLng(8.2280,124.2452),
          zoom: 14,
          mapTypeId: google.maps.MapTypeId.ROADMAP,
          mapTypeControl: true,
@@ -165,78 +165,7 @@ function parsePolyStrings(ps) {
          }
      });
 
-    heatmap = new google.maps.visualization.HeatmapLayer({
-      data: getPoints(),
-      map: null
-    });
 
-
-
- <?php
- $query = mysql_query("SELECT id, latitude as lat, longitude as lon, name FROM households");
- while ($row = mysql_fetch_array($query)){
- $id=$row['id'];
- $lat=$row['lat'];
- $lon=$row['lon'];
- $name=$row["name"];
- echo ("addMarker($lat, $lon,\"<b>$id</b><br/>$name\");\n");
-   echo ("addPoint($lat, $lon);");
- }
-?>
-
-    <?php
-    $query = mysql_query("SELECT AsText(shape) AS SHAPE FROM flood_maps");
-     while ($row = mysql_fetch_array($query)){
-         $temp = $row["SHAPE"];
-         echo "floods.push('$temp');";
-      }
-
-    ?>
-
-    var colors = ['#ffff00','#ff6600','#ff0000'];
-
-    for (i = 0; i < floods.length; i++) {
-        tmp = parsePolyStrings(floods[i]);
-        if (tmp.length) {
-            floods[i] = new google.maps.Polygon({
-                paths : tmp,
-                strokeColor : colors[i],
-                strokeOpacity : 0.35,
-                strokeWeight : 2,
-                fillColor : colors[i],
-                fillOpacity : 0.6
-            });
-            floods[i].setMap(null);
-        }
-    }
-
-
-<?php
-$query = mysql_query("SELECT AsText(shape) AS SHAPE FROM purok_boundaries");
- while ($row = mysql_fetch_array($query)){
-     $temp = $row["SHAPE"];
-     echo "polys.push('$temp');";
- }
-
- ?>
-
-     for (i = 0; i < polys.length; i++) {
-        tmp = parsePolyStrings(polys[i]);
-        if (tmp.length) {
-            polys[i] = new google.maps.Polygon({
-                paths : tmp,
-                strokeColor : '#000000',
-                strokeOpacity : 0.6,
-                strokeWeight : 1,
-                fillColor : '#FFFFFF',
-                fillOpacity : 0
-            });
-            polys[i].setMap(null);
-        }
-    }
-
- center = bounds.getCenter();
- map.fitBounds(bounds);
  
  }
  </script>
