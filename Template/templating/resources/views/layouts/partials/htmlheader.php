@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="../../../../public/dist/css/skins/_all-skins.min.css">
 
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../../../public/plugins/datatables/dataTables.bootstrap.css">
+
     <!-- Other Scripts -->
 
       <!-- iCheck -->

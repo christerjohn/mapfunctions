@@ -3,7 +3,7 @@ class DBController {
 	private $host = "localhost";
 	private $user = "root";
 	private $password = "";
-	private $database = "blog_examples";
+	private $database = "brisgis_db";
 	
 	function __construct() {
 		$conn = $this->connectDB();

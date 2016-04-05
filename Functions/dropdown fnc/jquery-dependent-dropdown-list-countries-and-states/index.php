@@ -1,12 +1,12 @@
 <?php
 require_once("dbcontroller.php");
 $db_handle = new DBController();
-$query ="SELECT * FROM country";
+$query ="SELECT * FROM provinces";
 $results = $db_handle->runQuery($query);
 ?>
 <html>
 <head>
-<TITLE>jQuery Dependent DropDown List - Countries and States</TITLE>
+<TITLE>Dependent DropDown List</TITLE>
 <head>
 <style>
 body{width:610px;}
@@ -16,30 +16,30 @@ body{width:610px;}
 </style>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script>
-function getState(val) {
+function getMunicipality(val) {
 	$.ajax({
 	type: "POST",
-	url: "get_state.php",
-	data:'country_id='+val,
+	url: "get_municipality.php",
+	data:'province_id='+val,
 	success: function(data){
-		$("#state-list").html(data);
-		$("#city-list").trigger("change"); 
+		$("#municipality-list").html(data);
+		$("#barangay-list").trigger("change"); 
 	}
 	});
 }
 
-function getCity(val) {
+function getBarangay(val) {
 	$.ajax({
 	type: "POST",
-	url: "get_city.php",
-	data:'state_id='+val,
+	url: "get_barangay.php",
+	data:'municipality_id='+val,
 	success: function(data){
-		$("#city-list").html(data);
+		$("#barangay-list").html(data);
 	}
 	});
 }
 
-function selectCountry(val) {
+function selectProvince(val) {
 $("#search-box").val(val);
 $("#suggesstion-box").hide();
 }
@@ -49,8 +49,8 @@ $("#suggesstion-box").hide();
 <div class="frmDronpDown">
 <div class="row">
 <label>Country:</label><br/>
-<select name="country" id="country-list" class="demoInputBox" onChange="getState(this.value);">
-<option value="">Select Country</option>
+<select name="province" id="province-list" class="demoInputBox" onChange="getMunicipality(this.value);">
+<option value="">Select Province</option>
 <?php
 foreach($results as $country) {
 ?>
@@ -62,14 +62,14 @@ foreach($results as $country) {
 </div>
 <div class="row">
 <label>State:</label><br/>
-<select name="state" id="state-list" class="demoInputBox" onChange="getCity(this.value);">
-<option value="">Select State</option>
+<select name="municipality" id="municipality-list" class="demoInputBox" onChange="getBarangay(this.value);">
+<option value="">Select Municipality</option>
 </select>
 </div>
 <div class="row">
 <label>City:</label><br/>
-<select name="city" id="city-list" class="demoInputBox">
-<option value="">Select City</option>
+<select name="barangay" id="barangay-list" class="demoInputBox">
+<option value="">Select Barangay</option>
 </select>
 </div>
 </div>
