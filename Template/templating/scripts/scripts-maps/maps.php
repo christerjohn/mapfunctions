@@ -61,6 +61,18 @@
       markerArray.push(marker);
  }
 
+ function setMarkerOnMapAll(map) {
+  for (var i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(map);
+  }
+}
+
+ function setBoundaryOnMapAll(map) {
+  for (var i = 0; i < polys.length; i++) {
+    polys[i].setMap(map);
+  }
+}
+
        function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
 
@@ -95,11 +107,15 @@
                 markerArray[i].setMap(arg);
             }
 
-            if (polys[0].getMap() != null) {
-                var arg = null;
-            } else {
-                var arg = map;
+            if (polys!==null && polys.length!== 0){
+
+                if (polys[0].getMap() != null) {
+                    var arg = null;
+                } else {
+                    var arg = map;
+                }
             }
+
             for (var i = 0; i < polys.length; i++) {
                 polys[i].setMap(arg);
             }
