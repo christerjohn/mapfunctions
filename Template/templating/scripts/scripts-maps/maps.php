@@ -87,7 +87,7 @@
       }
 
       function toggleBoundary() {
-            heatmap.setMap(null);
+            
 
             var arg = map;
             
@@ -103,11 +103,12 @@
             for (var i = 0; i < polys.length; i++) {
                 polys[i].setMap(arg);
             }
+
+            heatmap.setMap(null);
       }
 
       function toggleFloodHazard() {
-            heatmap.setMap(null);
-
+            
             var arg = map;
             
             for (var i = 0; i < markerArray.length; i++) {
@@ -122,6 +123,9 @@
             for (var i = 0; i < floods.length; i++) {
                 floods[i].setMap(arg);
             }
+
+            heatmap.setMap(null);
+
       }
 
 
@@ -164,7 +168,6 @@ function parsePolyStrings(ps) {
             style: google.maps.NavigationControlStyle.SMALL
          }
      });
-
 
  
  }

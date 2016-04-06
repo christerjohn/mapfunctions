@@ -22,6 +22,7 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
         <?php
             include '../../layouts/partials/mainheader.php';
             include '../../layouts/partials/sidebar.php';
+
         ?>
 
         <!-- Content Wrapper. Contains page content -->
@@ -30,6 +31,16 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
 
 <!-- ////////////////////////////// DARI KA EDIT UG SUGOD ////////////////////////////////////////// -->
 
+<?php include '../../../../scripts/script-googlemaps.php'; ?>
+<?php include '../../../../scripts/scripts-maps/maps.php';?>
+
+<?php include '../../../../scripts/script-floodenable.php'; ?>
+
+<?php include '../../../../scripts/script-floodmaps.php'; ?>
+
+
+<?php include '../../../../scripts/script-dropdown-map-option.php'; ?>
+
 <body onload="initMap()" >
 
             <div class="row" style="margin:0px; border:0px; padding:15px;">
@@ -37,7 +48,6 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                      <div class="panel panel-primary">
                         <div class="panel-heading">Map Options</div>
                              <div class="panel-body">
-
 
                                  <div class="form-group row">
                                     <label class="col-md-4 control-label">Province</label>
@@ -82,7 +92,15 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
 
                      <div class="panel panel-primary">
                          <div class="panel-heading">Flood Map</div>
-                             <div class="panel-body">                      
+                             <div class="panel-body">
+                                    <div class="form-group row">
+                                      <label class="col-md-4 control-label">Toggle</label>
+                                          <div class="col-md-7">
+                                              <div class="btn-group btn-group-sm">
+                                                   <button onclick="toggleBoundary()" type="button" class="btn btn-primary" id="boundary_toggle" disabled>Boundary</button> 
+                                              </div>
+                                           </div>
+                                    </div>                      
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Return Period</label>
                                           <div class="col-md-7">
@@ -113,7 +131,7 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4">
-                                                <button  id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
+                                                <button  onclick="enableFloodMaps()" id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
                                         </div>
                                  </div>
 
@@ -151,12 +169,6 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
         include '../../layouts/partials/scripts.php';
     ?>
 
-
-<?php include '../../../../scripts/script-googlemaps.php'; ?>
-<?php include '../../../../scripts/script-floodenable.php'; ?>
-<?php include '../../../../scripts/scripts-maps/maps.php';?>
-
-<?php include '../../../../scripts/script-dropdown-map-option.php'; ?>
 
 
 </body>

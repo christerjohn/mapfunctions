@@ -1,4 +1,5 @@
  <?php
+include "scripts-maps/maps.php";
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 if(!empty($_POST["barangay_id"])) {
