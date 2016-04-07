@@ -118,10 +118,11 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                                       <label class="col-md-4 control-label">Highlight Resident</label>
                                           <div class="col-md-7">
                                               <select class="form-control" id="highlight1" disabled>
+                                                <option value = "0">None</option>
                                                  <?php 
                                                     while ($row = mysql_fetch_array($level))
                                                     {
-                                                        echo "<option>".$row[level]."</option>";
+                                                        echo "<option value=".$row[id].">".$row[level]."</option>";
                                                     }
                                                   ?>  
                                               </select>                          

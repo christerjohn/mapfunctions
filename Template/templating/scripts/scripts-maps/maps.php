@@ -73,6 +73,12 @@
   }
 }
 
+ function setFloodOnMapAll(map) {
+  for (var i = 0; i < floods.length; i++) {
+    floods[i].setMap(map);
+  }
+}
+
        function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
 
