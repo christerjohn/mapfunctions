@@ -5,6 +5,7 @@
             var return_period = document.getElementById("return1").value;
             var flood_level = document.getElementById("highlight1").value;
 
+
       $(function(){
           $.ajax({
             type: "POST",
@@ -43,6 +44,9 @@
             });
       });
 
+      setMarkerOnMapAll(null);
+      markerArray = [];
+
       $(function(){
           $.ajax({
             type: "POST",
@@ -53,9 +57,33 @@
 
               if(data!==null && data.length!== 0)
               {
-                  setMarkerOnMapAll(null);
-                  markerArray = [];
 
+                  setIcon("https://lh4.ggpht.com/FRLzoxHDpRHxP6aFWxxQ1OUPlWnc55ZqnO7EpLtD8FBn6EK1zBerpF9P3BE3jJ6SFLNF7P0=w9-h9");
+                   $.each($.parseJSON(data), function(index, element) {
+                      var h_name = element.h_name;
+                      var h_id = element.h_id;
+                      var info = "<b>" + h_id + "</b><br/>" + h_name;
+                      addMarker(h_id, element.lat, element.lon, info);
+                      addPoint(element.lat, element.lon);
+                    });
+
+                    center = bounds.getCenter();
+                    map.fitBounds(bounds);
+              }
+            }
+            });
+      });
+
+      $(function(){
+          $.ajax({
+            type: "POST",
+            url: "../../../../scripts/get-points-not-on-level.php",
+            data:{barangay_id : barangay_id, return_period : return_period, flood_level : flood_level},
+            success: function(data){
+
+              if(data!==null && data.length!== 0)
+              {
+                  setIcon("https://lh6.ggpht.com/GO-A_KjZDF9yJeeER2fajzO4MgqML-q2rccm27ynBlD6R-xOR3pJOb42WKfE0MNFtRsKwK4=w9-h9");
                    $.each($.parseJSON(data), function(index, element) {
                       var h_name = element.h_name;
                       var h_id = element.h_id;

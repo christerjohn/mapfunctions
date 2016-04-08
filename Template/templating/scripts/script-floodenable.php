@@ -18,6 +18,7 @@
 
                   setMarkerOnMapAll(null);
                   markerArray = [];
+                  setIcon("https://lh6.ggpht.com/GO-A_KjZDF9yJeeER2fajzO4MgqML-q2rccm27ynBlD6R-xOR3pJOb42WKfE0MNFtRsKwK4=w9-h9");
 
                    $.each($.parseJSON(data), function(index, element) {
                       var h_name = element.h_name;

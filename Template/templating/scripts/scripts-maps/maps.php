@@ -1,12 +1,10 @@
 <script type="text/javascript">
  //Sample code written by August Li
- var icon = new google.maps.MarkerImage("https://lh6.ggpht.com/GO-A_KjZDF9yJeeER2fajzO4MgqML-q2rccm27ynBlD6R-xOR3pJOb42WKfE0MNFtRsKwK4=w9-h9",
- new google.maps.Size(10, 10), 
- new google.maps.Point(0, 0),
- new google.maps.Point(5,5));
+ 
 
  var center = null;
  var map = null;
+ var icon = null;
  var currentPopup;
  var bounds = new google.maps.LatLngBounds();
  var latlongs = [];
@@ -79,6 +77,14 @@
   for (var i = 0; i < floods.length; i++) {
     floods[i].setMap(map);
   }
+}
+
+function setIcon(marker_icon)
+{
+     icon = new google.maps.MarkerImage(marker_icon,
+     new google.maps.Size(10, 10), 
+     new google.maps.Point(0, 0),
+     new google.maps.Point(5,5));
 }
 
        function toggleHeatmap() {
