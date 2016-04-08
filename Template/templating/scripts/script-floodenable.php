@@ -23,7 +23,7 @@
                       var h_name = element.h_name;
                       var h_id = element.h_id;
                       var info = "<b>" + h_id + "</b><br/>" + h_name;
-                      addMarker(element.lat, element.lon, info);
+                      addMarker(h_id, element.lat, element.lon, info);
                       addPoint(element.lat, element.lon);
                     });
 

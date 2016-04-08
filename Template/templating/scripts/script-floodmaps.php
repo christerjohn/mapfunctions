@@ -3,6 +3,7 @@
 
             var barangay_id = document.getElementById("barangay-list").value;
             var return_period = document.getElementById("return1").value;
+            var flood_level = document.getElementById("highlight1").value;
 
       $(function(){
           $.ajax({
@@ -37,6 +38,34 @@
                         floods[i].setMap(map);
                     }
                 }
+              }
+            }
+            });
+      });
+
+      $(function(){
+          $.ajax({
+            type: "POST",
+            url: "../../../../scripts/get-points-on-level.php",
+            data:{barangay_id : barangay_id, return_period : return_period, flood_level : flood_level},
+            success: function(data){
+
+
+              if(data!==null && data.length!== 0)
+              {
+                  setMarkerOnMapAll(null);
+                  markerArray = [];
+
+                   $.each($.parseJSON(data), function(index, element) {
+                      var h_name = element.h_name;
+                      var h_id = element.h_id;
+                      var info = "<b>" + h_id + "</b><br/>" + h_name;
+                      addMarker(h_id, element.lat, element.lon, info);
+                      addPoint(element.lat, element.lon);
+                    });
+
+                    center = bounds.getCenter();
+                    map.fitBounds(bounds);
               }
             }
             });

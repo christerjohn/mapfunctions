@@ -28,7 +28,7 @@
  	return latlongs;
  }
 
- function addMarker(lat, lng, info) {
+ function addMarker(id, lat, lng, info) {
      var pt = new google.maps.LatLng(lat, lng);
      bounds.extend(pt);
 
@@ -37,6 +37,8 @@
          icon: icon,
          map: map
     });
+     
+     marker.metadata = {type: "point", id: id};
 
      var popup = new google.maps.InfoWindow({
          content: info,
