@@ -100,7 +100,17 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                                                    <button onclick="toggleBoundary()" type="button" class="btn btn-primary" id="boundary_toggle" disabled>Boundary</button> 
                                               </div>
                                            </div>
-                                    </div>                      
+                                    </div>  
+                                    <div class="form-group row">
+                                      <label class="col-md-3   control-label">Hazard Level</label>
+                                          <div class="col-md-9">
+                                              <div class="btn-group btn-group-sm">
+                                                   <button type="button" class="btn" style="background-color: #ffff00;"><strong>Low</strong></button>
+                                                   <button type="button" class="btn" style="background-color: #ff6600;"><strong>Med</strong></button>
+                                                   <button type="button" class="btn" style="background-color: #ff0000;"><strong>High</strong></button> 
+                                              </div>
+                                           </div>
+                                    </div>                    
                                     <div class="form-group row">
                                       <label class="col-md-4 control-label">Return Period</label>
                                           <div class="col-md-7">
@@ -163,12 +173,21 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
           <div class="row">
             <div class="col-xs-12">
               <div class="box collapsed-box">
+                <div class="row">
                 <div class="box-header">
+                 <div class="col-xs-10">
                   <h3 class="box-title">List of Highlighted Household</h3>
+                 </div>
+                  <div class="col-xs-1">
+                    <button type="button" class="btn btn-primary btn-sm" btn-sm>Export Data</button>
+                  </div>
+                  <div class="col-xs-1">
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-plus"></i></button>
                   </div>
+                 </div>
                 </div><!-- /.box-header -->
+              </div>
                 <div class="box-body">
                   <table id="household-list" class="table table-bordered table-hover">
                     <thead>
