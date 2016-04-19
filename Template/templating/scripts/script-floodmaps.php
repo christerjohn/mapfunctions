@@ -71,7 +71,8 @@
                                 h_id,
                                 h_name,
                                 element.h_usage,
-                                element.h_structure
+                                element.h_structure,
+                                element.purok_id
                             ]);
 
                         });

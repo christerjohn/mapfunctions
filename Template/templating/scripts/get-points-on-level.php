@@ -2,7 +2,7 @@
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 if(!empty($_POST["barangay_id"]) && !empty($_POST["return_period"]) && !empty($_POST["flood_level"])) {
-	$query ="SELECT DISTINCT households.id as h_id, latitude as lat, longitude as lon, households.name as h_name, households.household_usage as h_usage, households.structure as h_structure
+	$query ="SELECT DISTINCT barangay.purok_id as purok_id households.id as h_id, latitude as lat, longitude as lon, households.name as h_name, households.household_usage as h_usage, households.structure as h_structure
 	FROM flood_maps INNER JOIN barangays on flood_maps.barangay_id = barangays.id, 
 	residents INNER JOIN family_members on family_members.resident_id = residents.id
 	INNER JOIN families on family_members.family_id = families.id

@@ -196,6 +196,7 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                         <th>Household</th>
                         <th>Usage</th>
                         <th>Structure</th>
+                        <th>Purok</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -206,6 +207,7 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                         <th>Household</th>
                         <th>Usage</th>
                         <th>Structure</th>
+                        <th>Purok</th>
                       </tr>
                     </tfoot>
                   </table>
