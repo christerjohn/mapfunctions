@@ -38,6 +38,8 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
 
 <?php include '../../../../scripts/script-dropdown-map-option.php'; ?>
 
+<?php include '../../../../scripts/script-diseases.php'; ?>
+
 <body onload="initMap()" >
 
             <div class="row" style="margin:0px; border:0px; padding:15px;">
@@ -99,86 +101,12 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                                            </div>
                                     </div>
                                     <div class="form-group row">
-                                      <label class="col-md-4 control-label">Structure</label>
+                                      <label class="col-md-4 control-label">Disease</label>
                                           <div class="col-md-7">
-                                              <select class="form-control" id="structure1" disabled>
-                                                  <?php 
-                                                      while ($row = mysql_fetch_array($structure))
-                                                      {
-                                                          echo "<option>".$row[structure]."</option>";
-                                                      }
-                                                  ?>    
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Usage</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="usage1" disabled>
-                                                 <?php 
-                                                      while ($row = mysql_fetch_array($usage))
-                                                      {
-                                                          echo "<option>".$row[household_usage]."</option>";
-                                                      }
-                                                  ?>   
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Family Income</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="family1" disabled>
-                                                  <?php 
-                                                      while ($row = mysql_fetch_array($income))
-                                                      {
-                                                          echo "<option>".$row[net_value]."</option>";
-                                                      }
-                                                  ?>      
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Education Level</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="education1" disabled>
-                                              <option>HighSchool</option>
-                                              <option>College</option>    
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Occupation</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="occupation1" disabled>
-                                              <option>Teacher</option>
-                                              <option>Level 2</option>    
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Gender</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="gender1" disabled>
-                                              <option>Male</option>
-                                              <option>Female</option>    
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Age</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="age1" disabled>
-                                              <option>27</option>
-                                              <option>28</option>    
-                                              </select> 
-                                          </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <label class="col-md-4 control-label">Civil Status</label>
-                                          <div class="col-md-7">
-                                              <select class="form-control" id="civil1" disabled>
-                                              <option>Single</option>
-                                              <option>Married</option>    
+                                              <select class="form-control" id="disease1" disabled>
+                                                <option value="1">Dengue</option>
+                                                <option value="2">Malaria</option>
+                                                <option value="3">Diarrhea</option>  
                                               </select> 
                                           </div>
                                     </div>
@@ -186,7 +114,7 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4"></div>
                                         <div class="col-sm-4">
-                                                <button  id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
+                                                <button  onClick="DiseasesFnc()"id="go2" type="button" class="btn btn-primary" btn-sm disabled>GO</button>
                                         </div>
                                     </div>
                             </div>

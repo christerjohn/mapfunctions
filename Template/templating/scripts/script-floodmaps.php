@@ -54,7 +54,7 @@
                   url: "../../../../scripts/get-points-on-level.php",
                   data:{barangay_id : barangay_id, return_period : return_period, flood_level : flood_level},
                   success: function(data){
-
+                    console.log(data);
 
                     if(data!==null && data.length!== 0)
                     {
