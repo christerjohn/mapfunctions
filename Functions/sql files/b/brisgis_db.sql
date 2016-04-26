@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2016 at 03:51 AM
+-- Generation Time: Apr 26, 2016 at 04:17 AM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.5.30
 
@@ -6423,6 +6423,7 @@ ALTER TABLE `buildings`
 -- Indexes for table `disasters`
 --
 ALTER TABLE `disasters`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `building_id` (`building_id`);
 
 --
@@ -6523,10 +6524,15 @@ ALTER TABLE `barangays`
 ALTER TABLE `buildings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1191;
 --
+-- AUTO_INCREMENT for table `disasters`
+--
+ALTER TABLE `disasters`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `diseases`
 --
 ALTER TABLE `diseases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `families`
 --
