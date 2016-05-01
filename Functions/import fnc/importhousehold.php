@@ -14,14 +14,19 @@ if (isset($_FILES['csv']['size']) > 0) {
     $count = -1;
     //loop through the csv file and insert into database 
     do { 
+      $int= mt_rand(512055681,1262055681);
+      $constructed = date("Y-m-d",$int);
+      echo $string;
+
         if ($data[0]) { 
-            mysql_query("INSERT INTO households (id, latitude, longitude, purok_id, name, net_value, household_usage, structure, area, holding) VALUES 
+            mysql_query("INSERT INTO households (id, latitude, longitude, purok_id, name, year_constructed, net_value, household_usage, structure, area, holding) VALUES 
                 ( 
                   '".$count."',
                   '".addslashes($data[3])."',
                   '".addslashes($data[4])."',
                   '".addslashes($data[5])."',
                   '".addslashes($data[9])." Household',
+                  '".addslashes($constructed)."',
                   '".addslashes($data[39])."',
                   '".addslashes($data[40])."',
                   '".addslashes($data[43])."',
@@ -57,6 +62,12 @@ if (isset($_FILES['csv']['size']) > 0) {
   <input name="csv" type="file" id="csv" /> 
   <input type="submit" name="Submit" value="Submit" /> 
 </form> 
+
+<?php
+$int= mt_rand(512055681,1262055681);
+$string = date("Y-m-d",$int);
+echo $string;
+?>
 
 </body> 
 </html> 

@@ -1,6 +1,6 @@
 <?php
 
-$dbname            ='brisgis_db'; //Name of the database
+$dbname            ='brisgis'; //Name of the database
 $dbuser            ='root'; //Username for the db
 $dbpass            =''; //Password for the db
 $dbserver          ='localhost'; //Name of the mysql server
