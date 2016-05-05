@@ -15,7 +15,7 @@ if (isset($_FILES['csv']['size']) > 0) {
     //loop through the csv file and insert into database 
     do { 
         if ($data[0]) { 
-            mysql_query("INSERT INTO household_heads (household_id, resident_id) VALUES 
+            mysql_query("INSERT INTO household_heads (building_id, resident_id) VALUES 
                 ( 
                   '".$count."',
                   '".$count."'

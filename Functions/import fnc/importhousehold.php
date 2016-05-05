@@ -14,24 +14,25 @@ if (isset($_FILES['csv']['size']) > 0) {
     $count = -1;
     //loop through the csv file and insert into database 
     do { 
-      $int= mt_rand(512055681,1262055681);
-      $constructed = date("Y-m-d",$int);
-      echo $string;
-
         if ($data[0]) { 
-            mysql_query("INSERT INTO households (id, latitude, longitude, purok_id, name, year_constructed, net_value, household_usage, structure, area, holding) VALUES 
+      $int= rand(512055681,1262055681);
+      $structure = array('Concrete', 'Bamboo', 'Makeshift', 'Masonry', 'Metal', 'Wood');
+      $index = rand(0,5);
+      $constructed = date("Y-m-d",$int);
+            mysql_query("INSERT INTO buildings (id, latitude, longitude, purok_id, name, year_constructed, net_value, building_usage, structure, area, holding, no_stories) VALUES 
                 ( 
                   '".$count."',
                   '".addslashes($data[3])."',
                   '".addslashes($data[4])."',
                   '".addslashes($data[5])."',
                   '".addslashes($data[9])." Household',
-                  '".addslashes($constructed)."',
+                  '".$constructed."',
                   '".addslashes($data[39])."',
-                  '".addslashes($data[40])."',
-                  '".addslashes($data[43])."',
+                  'Residential',
+                  '".$structure[$index]."',
                   '".addslashes($data[41])."',
-                  '".addslashes($data[73])."'
+                  'Owner',
+                  '1'
                 ) 
             "); 
         } 
@@ -65,8 +66,10 @@ if (isset($_FILES['csv']['size']) > 0) {
 
 <?php
 $int= mt_rand(512055681,1262055681);
-$string = date("Y-m-d",$int);
-echo $string;
+      $structure = array('Concrete', 'Bamboo', 'Makeshift', 'Masonry', 'Metal', 'Wood');
+      $index = mt_rand(0,5);
+      $constructed = date("Y-m-d",$int);
+      echo $structure[$index];
 ?>
 
 </body> 

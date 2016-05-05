@@ -12,15 +12,25 @@ if (isset($_FILES['csv']['size']) > 0) {
     $file = $_FILES['csv']['tmp_name']; 
     $handle = fopen($file,"r"); 
     $count = -1;
+
     //loop through the csv file and insert into database 
     do { 
         if ($data[0]) { 
-            mysql_query("INSERT INTO families (id, household_id, family_identifier, monthly_income) VALUES 
+              $index1 = rand(0,1);
+              $index2 = rand(0,2);
+              
+              $if_4ps= array('Yes','No');
+              $livelihood = array('Livestock', 'Farming', 'Small Business Store');
+
+            mysql_query("INSERT INTO families (id, building_id, family_identifier, monthly_income, if_other_livelihood, livelihood, if_4ps) VALUES 
                 ( 
                   '".$count."',
                   '".$count."',
                   '".addslashes($data[9])." Family',
-                  '".addslashes($data[29])."'
+                  '".addslashes($data[29])."',
+                  'Yes',
+                  '".$livelihood[$index2]."',
+                  '".$if_4ps[$index1]."'
                 ) 
             "); 
         } 
@@ -29,7 +39,7 @@ if (isset($_FILES['csv']['size']) > 0) {
     // 
 
     //redirect 
-    header('Location: importhousehold.php?success=1'); die; 
+    header('Location: importfamily.php?success=1'); die; 
 
 } 
 

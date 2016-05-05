@@ -183,7 +183,7 @@ include '../../../../functions/fnc-database/sql-map-options/sql-floodoptions.php
                   </div>
                   <div class="col-xs-1">
                   <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="collapsed" data-toggle="tooltip" title="Collapse"><i class="fa fa-plus"></i></button>
                   </div>
                  </div>
                 </div><!-- /.box-header -->
